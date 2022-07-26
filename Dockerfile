@@ -17,6 +17,7 @@ RUN apk add --no-cache \
 		file \
 		gettext \
 		git \
+		npm \
 	;
 
 ARG APCU_VERSION=5.1.21
@@ -107,6 +108,8 @@ RUN set -eux; \
 	chmod +x bin/console; sync
 VOLUME /srv/app/var
 
+RUN npm install npm run
+
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
 
@@ -126,3 +129,4 @@ COPY --from=dunglas/mercure:v0.11 /srv/public /srv/mercure-assets/
 COPY --from=symfony_caddy_builder /usr/bin/caddy /usr/bin/caddy
 COPY --from=symfony_php /srv/app/public public/
 COPY docker/caddy/Caddyfile /etc/caddy/Caddyfile
+
