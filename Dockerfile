@@ -108,7 +108,8 @@ RUN set -eux; \
 	chmod +x bin/console; sync
 VOLUME /srv/app/var
 
-RUN npm install npm run
+RUN npm install;
+RUN npm run build;
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
