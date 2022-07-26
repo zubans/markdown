@@ -7,15 +7,14 @@
         <div class="row col">
             <p>Парсер жирного текста и курсива</p>
         </div>
-        <textarea v-model="message" v-on:input="parse"></textarea>
-        <div class="response" v-html="response"/>
+        <textarea v-model="message" @input="parse"></textarea>
+        <div class="response" v-html="response" />
     </div>
 
 </template>
 
 <script>
 export default {
-    name: "Home",
     data() {
         return {
             response: '',
@@ -23,7 +22,7 @@ export default {
         };
     },
     methods: {
-        parse() {
+        parse: function() {
             const options = {
                 url: 'https://localhost/convert',
                 method: 'POST',
@@ -33,7 +32,6 @@ export default {
             }
             this.$axios(options)
                 .then((res) => {
-                    console.log(res.data)
                     this.response = res.data
                 })
                 .catch((err) => {
