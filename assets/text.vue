@@ -7,7 +7,7 @@
         <div class="row col">
             <p>Парсер жирного текста и курсива</p>
         </div>
-        <textarea v-model="message" v-on:change="parse"></textarea>
+        <textarea v-model="message" v-on:input="parse"></textarea>
         <div class="response" v-html="response"/>
     </div>
 
