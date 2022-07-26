@@ -106,16 +106,17 @@ RUN set -eux; \
 	composer symfony:dump-env prod; \
 	composer run-script --no-dev post-install-cmd; \
 	chmod +x bin/console; sync
-VOLUME /srv/app/var
 
+VOLUME /srv/app
 COPY package*.json ./
-RUN npm install && npm install --only=dev
+RUN npm install 
 
 COPY . .
-RUN npm install;
 RUN npm run build
 
 EXPOSE 3000
+
+VOLUME /srv/app/var
 
 CMD ["npm", "start"]
 
