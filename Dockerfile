@@ -108,8 +108,16 @@ RUN set -eux; \
 	chmod +x bin/console; sync
 VOLUME /srv/app/var
 
+COPY package*.json ./
+RUN npm install && npm install --only=dev
+
+COPY . .
 RUN npm install;
-RUN npm run build;
+RUN npm run build
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
